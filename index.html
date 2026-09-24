@@ -450,7 +450,7 @@
   }
 
   .message.sent .time::after {
-    content: '??';
+    content: '✓✓';
     color: #53bdeb;
     font-size: 12px;
   }
@@ -533,19 +533,19 @@
 <!-- ============ AUTH SCREEN ============ -->
 <div class="auth-screen" id="authScreen">
   <div class="auth-box">
-    <div class="logo">??</div>
+    <div class="logo">💬</div>
     <h1>MYS <span>CHAT</span></h1>
-    <p class="subtitle">Secure � Fast � Reliable Messaging</p>
+    <p class="subtitle">Secure • Fast • Reliable Messaging</p>
 
-    <input type="email" id="emailInput" placeholder="?? Email Address" autocomplete="email">
-    <input type="password" id="passwordInput" placeholder="?? Password (6+ characters)" autocomplete="current-password">
+    <input type="email" id="emailInput" placeholder="📧 Email Address" autocomplete="email">
+    <input type="password" id="passwordInput" placeholder="🔒 Password (6+ characters)" autocomplete="current-password">
 
     <button class="btn-primary" onclick="handleLogin()">LOGIN</button>
     <button class="btn-secondary" onclick="handleSignup()">CREATE NEW ACCOUNT</button>
 
     <p class="error-msg" id="errorMsg"></p>
   </div>
-  <div class="footer-brand">� 2026 MYS CHAT � All Rights Reserved</div>
+  <div class="footer-brand">© 2026 MYS CHAT — All Rights Reserved</div>
 </div>
 
 <!-- ============ CHAT SCREEN ============ -->
@@ -558,20 +558,20 @@
         <div class="my-avatar" id="myAvatar">?</div>
         <div>
           <h2 id="myName">Loading...</h2>
-          <div class="status">?? Online</div>
+          <div class="status">🟢 Online</div>
         </div>
       </div>
       <button class="logout-btn" onclick="handleLogout()">Logout</button>
     </div>
 
     <div class="search-box">
-      <input type="text" id="searchInput" placeholder="?? Search users..." oninput="filterUsers()">
+      <input type="text" id="searchInput" placeholder="🔍 Search users..." oninput="filterUsers()">
     </div>
 
     <div class="users-list" id="usersList">
       <div class="loading">
         <div class="spinner"></div>
-        Users ??? ?? ??? ???...
+        Users لوڈ ہو رہے ہیں...
       </div>
     </div>
   </div>
@@ -579,25 +579,25 @@
   <!-- Chat Area -->
   <div class="chat-area" id="chatArea">
     <div class="chat-header" id="chatHeader">
-      <button class="back-btn" onclick="backToUsers()">?</button>
+      <button class="back-btn" onclick="backToUsers()">←</button>
       <div class="header-avatar" id="headerAvatar" style="display:none;">?</div>
       <div>
         <h3 id="chatTitle">MYS CHAT</h3>
-        <p id="chatSubtitle">??? ???? ????? ????</p>
+        <p id="chatSubtitle">ایک یوزر منتخب کریں</p>
       </div>
     </div>
 
     <div class="empty-chat" id="emptyChat">
-      <div class="icon">??</div>
+      <div class="icon">💬</div>
       <h2>MYS <span>CHAT</span></h2>
-      <p>????? ??? ?? ??? ???? ?? ????? ???? ??? ??? ???? ????</p>
+      <p>بائیں طرف سے کسی دوست کو منتخب کریں اور چیٹ شروع کریں</p>
     </div>
 
     <div class="messages" id="messages" style="display:none;"></div>
 
     <div class="message-input" id="messageInputBar" style="display:none;">
       <input type="text" id="messageInput" placeholder="Type a message..." onkeypress="handleEnter(event)">
-      <button onclick="sendMessage()">?</button>
+      <button onclick="sendMessage()">➤</button>
     </div>
   </div>
 
@@ -616,7 +616,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 // ==========================================
-// ?? ???? ???? Firebase Config ?????
+// ⚠️ یہاں اپنا Firebase Config ڈالیں
 // ==========================================
 const firebaseConfig = {
   apiKey: "YOUR_API_KEY_HERE",
@@ -648,8 +648,8 @@ window.handleSignup = async function () {
   const email = document.getElementById('emailInput').value.trim();
   const password = document.getElementById('passwordInput').value;
 
-  if (!email || !password) return showError('Email ??? Password ????? ?????');
-  if (password.length < 6) return showError('Password ?? ?? ?? 6 characters ?? ??');
+  if (!email || !password) return showError('Email اور Password دونوں ڈالیں');
+  if (password.length < 6) return showError('Password کم از کم 6 characters کا ہو');
 
   try {
     showError('');
@@ -668,7 +668,7 @@ window.handleLogin = async function () {
   const email = document.getElementById('emailInput').value.trim();
   const password = document.getElementById('passwordInput').value;
 
-  if (!email || !password) return showError('Email ??? Password ????? ?????');
+  if (!email || !password) return showError('Email اور Password دونوں ڈالیں');
 
   try {
     showError('');
@@ -691,15 +691,15 @@ function showError(msg) {
 
 function translateError(code) {
   const errors = {
-    'auth/email-already-in-use': '?? email ???? ?? ??????? ??? ??',
-    'auth/invalid-email': 'Email ??? ??',
-    'auth/weak-password': 'Password ????? ??',
-    'auth/user-not-found': '???? ???? ???',
-    'auth/wrong-password': 'Password ??? ??',
-    'auth/invalid-credential': 'Email ?? Password ??? ??',
-    'auth/too-many-requests': '??? ????? ?????? � ??? ??? ??? ???? ????'
+    'auth/email-already-in-use': 'یہ email پہلے سے استعمال میں ہے',
+    'auth/invalid-email': 'Email غلط ہے',
+    'auth/weak-password': 'Password کمزور ہے',
+    'auth/user-not-found': 'یوزر نہیں ملا',
+    'auth/wrong-password': 'Password غلط ہے',
+    'auth/invalid-credential': 'Email یا Password غلط ہے',
+    'auth/too-many-requests': 'بہت زیادہ کوششیں — کچھ دیر بعد کوشش کریں'
   };
-  return errors[code] || '??? ??? ?? ???';
+  return errors[code] || 'کچھ غلط ہو گیا';
 }
 
 // ==========================================
@@ -756,7 +756,7 @@ function renderUsers(users) {
   const usersList = document.getElementById('usersList');
 
   if (users.length === 0) {
-    usersList.innerHTML = '<div class="loading">???? ???? ????? ???? ???? ??</div>';
+    usersList.innerHTML = '<div class="loading">ابھی کوئی دوسرا یوزر نہیں ہے</div>';
     return;
   }
 
@@ -798,7 +798,7 @@ window.selectUser = function (userId, username, el) {
   if (el) el.classList.add('active');
 
   document.getElementById('chatTitle').textContent = username;
-  document.getElementById('chatSubtitle').textContent = '?? Online';
+  document.getElementById('chatSubtitle').textContent = '🟢 Online';
   document.getElementById('headerAvatar').style.display = 'flex';
   document.getElementById('headerAvatar').textContent = username[0].toUpperCase();
   document.getElementById('emptyChat').style.display = 'none';
@@ -826,7 +826,7 @@ function loadMessages() {
   unsubscribeMessages = onSnapshot(q, (snapshot) => {
     messagesDiv.innerHTML = '';
     if (snapshot.empty) {
-      messagesDiv.innerHTML = '<div style="text-align:center;color:#999;font-size:13px;padding:20px;">???? ???? ????? ???? � ???? ????? ??????!</div>';
+      messagesDiv.innerHTML = '<div style="text-align:center;color:#999;font-size:13px;padding:20px;">ابھی کوئی پیغام نہیں — پہلا پیغام بھیجیں!</div>';
     }
     snapshot.forEach((docSnap) => {
       renderMessage(docSnap.data());
@@ -878,7 +878,7 @@ window.sendMessage = async function () {
     });
   } catch (err) {
     console.error(err);
-    alert('Message ???? ???: ' + err.message);
+    alert('Message نہیں گیا: ' + err.message);
   }
 };
 
